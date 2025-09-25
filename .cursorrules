@@ -1,0 +1,54 @@
+# CRITICAL DEVELOPMENT RULES
+
+## SINGLE SERVER RULE (MANDATORY)
+- NEVER run multiple instances of the same development server
+- ONLY ONE `npm run dev` command per project directory at a time
+- ALWAYS check for existing processes before starting servers
+
+## NO TURBOPACK RULE (MANDATORY)
+- NEVER use Turbopack in development or build processes
+- Always use standard Webpack-based Next.js build system
+- Turbopack is explicitly disabled in next.config.mjs
+- Keep builds clean and consistent
+
+## Process Management Commands
+# Check for existing processes FIRST
+ps aux | grep -E "(npm run dev|nodemon|next dev)" | grep -v grep
+
+# Kill existing processes if found
+pkill -f "next dev"
+pkill -f "nodemon"
+
+# Check port usage
+lsof -i :3000  # Frontend
+lsof -i :3001  # Backend
+
+## Daily Development Checklist
+- [ ] Check for existing processes before starting work
+- [ ] Choose frontend OR backend to work on first
+- [ ] Start only ONE server at a time initially
+- [ ] Fix compilation errors immediately
+- [ ] Monitor server stability - no constant restarts
+
+## Database Development Rules
+- ALWAYS run `prisma generate` after schema changes
+- Test database connections before starting servers
+- Use development database for testing, production database for deployment
+
+## Authentication Rules
+- Frontend uses ONLY @clerk/nextjs
+- Backend uses ONLY @clerk/backend, @clerk/express, and svix
+- Never mix authentication packages between frontend and backend
+
+## TypeScript Rules
+- Fix type errors immediately - don't ignore them
+- Use strict mode always
+- Generate types after Prisma schema changes
+- Run `npm run build` to check for type errors before commits
+
+## Emergency cleanup if environment becomes unstable
+pkill -f "fullstack-test"
+rm -rf frontend/.next backend/dist
+cd backend && npm run prisma:generate  # Regenerate Prisma client
+cd frontend && npm install  # Reinstall if needed
+cd backend && npm install   # Reinstall if needed
