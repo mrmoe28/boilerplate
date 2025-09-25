@@ -45,3 +45,4 @@ logs/
 .cache/
 tmp/
 temp/
+.vercel
