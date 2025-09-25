@@ -34,18 +34,42 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton>
-                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+          <header className="bg-white shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center h-16">
+                <div className="flex items-center">
+                  <a href="/" className="text-xl font-bold text-gray-900 hover:text-indigo-600 transition-colors">
+                    FullStack Boilerplate
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <SignedOut>
+                    <SignInButton mode="modal">
+                      <button className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Sign In
+                      </button>
+                    </SignInButton>
+                    <SignUpButton>
+                      <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm px-4 py-2 hover:bg-indigo-500 transition-colors cursor-pointer">
+                        Sign Up
+                      </button>
+                    </SignUpButton>
+                  </SignedOut>
+                  <SignedIn>
+                    <a 
+                      href="/dashboard" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      Dashboard
+                    </a>
+                    <UserButton 
+                      afterSignOutUrl="/"
+                      userProfileMode="modal"
+                    />
+                  </SignedIn>
+                </div>
+              </div>
+            </div>
           </header>
           {children}
         </body>
