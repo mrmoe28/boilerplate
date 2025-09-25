@@ -1,22 +1,9 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
       <div className="container mx-auto px-4 py-16">
-        <div className="flex justify-end mb-8">
-          <SignedOut>
-            <SignInButton>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                Sign In
-              </button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </div>
-        
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Full Stack Application
@@ -24,6 +11,7 @@ export default function Home() {
           <p className="text-lg text-gray-600 mb-8">
             Built with Next.js 15, Express.js, TypeScript, Prisma, and Clerk
           </p>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="font-semibold text-gray-900">Frontend</h3>
@@ -43,10 +31,21 @@ export default function Home() {
             </div>
           </div>
 
+          <SignedOut>
+            <div className="mt-12">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Get Started</h2>
+              <p className="text-gray-600">Sign in to access your dashboard and start using the application.</p>
+            </div>
+          </SignedOut>
+
           <SignedIn>
             <div className="mt-12">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Welcome!</h2>
               <p className="text-gray-600">You are successfully authenticated with Clerk.</p>
+              <div className="mt-6 bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+                <h3 className="font-semibold text-gray-900 mb-2">✅ Authentication Active</h3>
+                <p className="text-sm text-gray-600">Your session is secure and the backend database is connected.</p>
+              </div>
             </div>
           </SignedIn>
         </div>
