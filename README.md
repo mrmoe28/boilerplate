@@ -110,6 +110,42 @@ NEXT_PUBLIC_API_URL="http://localhost:3001"
 - `npm run lint` - Run ESLint
 - `npm run start` - Start production server
 
+## Deployment
+
+### Vercel Deployment (Recommended)
+
+This project is optimized for Vercel deployment:
+
+1. **Connect to Vercel**:
+   - Link your GitHub repository to Vercel
+   - Vercel will automatically detect the Next.js frontend
+
+2. **Environment Variables**:
+   - Set production environment variables in Vercel dashboard
+   - See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete list
+
+3. **Database Setup**:
+   ```bash
+   # Production database migration
+   npx prisma migrate deploy
+   ```
+
+4. **Automatic Deployments**:
+   - Push to `main` branch triggers production deployment
+   - Pull requests create preview deployments
+
+### Manual Deployment
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel --prod
+```
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
 ## Development Guidelines
 
 See [CLAUDE.md](./CLAUDE.md) for detailed development guidelines and best practices.

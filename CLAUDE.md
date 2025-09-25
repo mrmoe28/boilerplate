@@ -145,9 +145,34 @@ NEXT_PUBLIC_API_URL="http://localhost:3001"
 - Never commit .env files
 - Resolve merge conflicts systematically
 
-### Pre-Deployment Checklist
-- [ ] Run database migrations
-- [ ] Configure production environment variables
+### Vercel Deployment
+
+This project is configured for Vercel deployment with automatic builds.
+
+#### Environment Variables (Vercel Dashboard)
+```bash
+# Frontend
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
+NEXT_PUBLIC_API_URL=https://your-app.vercel.app
+
+# Backend  
+DATABASE_URL=postgresql://... (Neon production)
+CLERK_SECRET_KEY=sk_live_...
+CLERK_WEBHOOK_SECRET=whsec_...
+CORS_ORIGIN=https://your-app.vercel.app
+```
+
+#### Deployment Process
+1. Push to `main` branch triggers automatic deployment
+2. Vercel builds both frontend (Next.js) and backend (Node.js)
+3. Environment variables injected from Vercel dashboard
+4. Database migrations run with `prisma migrate deploy`
+
+#### Pre-Deployment Checklist
+- [ ] Set all environment variables in Vercel dashboard
+- [ ] Run database migrations: `npx prisma migrate deploy`
+- [ ] Configure production database (Neon)
+- [ ] Update Clerk webhook URLs to production domain
 - [ ] Build both frontend and backend successfully
 - [ ] Run linting and fix any issues
 - [ ] Ensure no hardcoded secrets in code
